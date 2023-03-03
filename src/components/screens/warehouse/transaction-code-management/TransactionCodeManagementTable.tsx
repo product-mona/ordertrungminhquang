@@ -14,8 +14,6 @@ export const TransactionCodeManagementTable: React.FC<
 > = ({ data, loading, filter, handleFilter }) => {
   const router = useRouter();
 
-  console.log(data);
-
   const columnsUser: TColumnsType<TSmallPackage> = [
     // {
     //   dataIndex: "Id",

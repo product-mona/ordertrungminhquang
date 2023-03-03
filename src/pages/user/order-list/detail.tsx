@@ -30,7 +30,6 @@ const Index: TNextPageWithLayout = () => {
       enabled: !!+query?.id,
     }
   );
-
   const updatePaid = (type: "deposit" | "payment") => {
     const id = toast.loading("Đang xử lý ...");
     mainOrder
@@ -78,12 +77,12 @@ const Index: TNextPageWithLayout = () => {
         <OrderTransportList data={data?.Data?.SmallPackages} />
         <OrderIDProductList data={data?.Data?.Orders} />
         <OrderIDPaymentHistory data={data?.Data?.PayOrderHistories} />
-        {data && (
+        {/* {data && (
           <MessageControlUser
             clientId={data.Data.UID}
             mainOrderId={+query?.id}
           />
-        )}
+        )} */}
       </div>
     </React.Fragment>
   );

@@ -252,12 +252,12 @@ const Index: TNextPageWithLayout = () => {
           </div>
         </div>
       </FormProvider>
-      {data && (
+      {/* {data && (
         <MessageControlManager
           clientId={data.Data.UID}
           mainOrderId={+query?.id}
         />
-      )}
+      )} */}
     </Spin>
   );
 };

@@ -19,16 +19,16 @@ export const OrderTransportList: React.FC<TTable<TSmallPackage>> = ({
       toast.error(error);
     }
   };
-  console.log(data);
 
   const columns: TColumnsType<TSmallPackage> = [
     {
-      dataIndex: "OrderTransactionCode",
-      title: "Mã vận đơn",
-    },
-    {
       dataIndex: "Code",
       title: "Mã đơn hàng",
+      rowSpan: 1,
+    },
+    {
+      dataIndex: "OrderTransactionCode",
+      title: "Mã vận đơn",
     },
     {
       dataIndex: "Weight",
