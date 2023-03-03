@@ -100,6 +100,7 @@ export const OrderProductList: React.FC<TProps> = ({
               loading={loadingUpdate}
               RoleID={RoleID}
               dataStatus={data?.Status}
+              orderType={data?.OrderType}
               // setCheckUpdate={() => setCheckUpdate(true)}
             />
           ))}
