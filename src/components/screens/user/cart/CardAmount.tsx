@@ -15,11 +15,13 @@ export const CardAmount = ({
   toggleAllShopId,
   // totalSelectPrice,
   refetchCart,
+  isFetching,
   onPress,
 }) => {
   const [totalSelectPrice, setTotalSelectPrice] = useState(0);
   const mutationDeleteShop = useMutation(orderShopTemp.delete);
   const [disabledDel, setdisabledDel] = useState(false);
+  console.log(isFetching);
 
   useEffect(() => {
     const handleCountMoney = () => {

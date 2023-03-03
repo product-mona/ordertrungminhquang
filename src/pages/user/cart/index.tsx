@@ -250,6 +250,7 @@ const Index: TNextPageWithLayout = () => {
                 </div>
                 <div className="md:order-1 xl:order-2 xl:col-span-3">
                   <CardAmount
+                    isFetching={isFetching}
                     currentCart={currentCart}
                     allShopIds={chosenShopIds}
                     chosenShopIds={chosenShopIds}
