@@ -86,6 +86,8 @@ const Index: TNextPageWithLayout = () => {
           type: "error",
         });
       },
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
     }
   );
 
