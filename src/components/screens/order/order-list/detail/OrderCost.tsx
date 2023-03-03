@@ -16,6 +16,10 @@ type TProps = {
         Id: number;
         TotalPriceVND: number;
         Status: number;
+        // IsPacked: boolean;
+        // IsInsurance: boolean;
+        // IsFastDelivery: boolean;
+        // IsCheckProduct: boolean;
       });
   RoleID: number;
 };
@@ -96,11 +100,17 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
   const { control, watch, setValue, reset, getValues } =
     useFormContext<TOrder>();
 
+  const all = watch();
+
   const formValue = useMemo(() => watch(), [watch() as TOrder]);
   const handleSetValue = useCallback(
     (key: keyof TOrder, value: any) => setValue(key, value),
     []
   );
+
+  React.useEffect(() => {
+    reset(data);
+  }, [data]);
 
   return (
     <React.Fragment>
@@ -354,67 +364,6 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
       </div>
       <ChangeChargeComponent control={control} data={data} RoleID={RoleID} />
 
-      {/* ====== <div className="flex items-center mt-4">
-				<div className={costTitle}>Phí lưu kho</div>
-				<div className={costBox}>
-					<div className="col-span-2">
-						<FormInputNumber
-							suffix=" VNĐ"
-							control={control}
-							name="FeeInWareHouse"
-							placeholder=""
-							disabled
-							allowNegative={false}
-						/>
-					</div>
-				</div>
-			</div> */}
-      {/* <div className="my-8 text-base font-bold py-2 uppercase border-b border-main">
-				Điều chỉnh phí
-			</div>
-			<div className="flex items-center mt-4">
-				<div className={(costTitle)}>Tỷ giá</div>
-				<div className={(costBox)}>
-					<div className="col-span-2">
-						<FormInputNumber
-							suffix=" VNĐ"
-							control={control}
-							name="CurrentCNYVN"
-							placeholder=""
-							allowNegative={false}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className="flex items-center mt-4">
-				<div className={(costTitle)}>Đặt cọc (%)</div>
-				<div className={(costBox)}>
-					<div className="col-span-2">
-						<FormInputNumber
-							suffix="%"
-							control={control}
-							name="LessDeposit"
-							placeholder=""
-							allowNegative={false}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className="flex items-center mt-4">
-				<div className={(costTitle)}>Phí dịch vụ (%)</div>
-				<div className={(costBox)}>
-					<div className="col-span-2">
-						<FormInputNumber
-							suffix="%"
-							control={control}
-							name="FeeBuyProPT"
-							placeholder=""
-							allowNegative={false}
-						/>
-					</div>
-				</div>
-			</div> ======*/}
-
       <div className="my-4 text-base font-bold py-2 uppercase border-b border-main">
         Phí tùy chọn
       </div>
@@ -435,6 +384,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               )
             }
             checkBoxClassName="large"
+            // defaultChecked={data?.IsCheckProduct}
           />
         </div>
         <div className={costBox}>
@@ -494,6 +444,8 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 RoleID === 6
               )
             }
+            // defaultChecked={getValues("IsPacked")}
+            // defaultChecked={data?.IsPacked}
           />
         </div>
         <div className={costBox}>
@@ -570,6 +522,8 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 RoleID === 6
               )
             }
+            // defaultChecked={data?.IsInsurance}
+            // defaultChecked={getValues("IsInsurance")}
           />
         </div>
         <div className={costBox}>
@@ -602,6 +556,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 RoleID === 6
               )
             }
+            // defaultChecked={data?.IsFastDelivery}
           />
         </div>
         <div className={costBox}>
@@ -628,6 +583,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
           </div>
         </div>
       </div>
+
       <div className="my-4 text-base font-bold py-2 uppercase border-b border-main">
         Thanh toán
       </div>
