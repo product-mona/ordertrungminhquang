@@ -11,6 +11,7 @@ type TProps = {
   RoleID: number;
   // setCheckUpdate: () => void;
   dataStatus: number;
+  orderType: number;
 };
 
 export const OrderProductItem: React.FC<TProps> = ({
@@ -20,17 +21,23 @@ export const OrderProductItem: React.FC<TProps> = ({
   loading,
   RoleID,
   dataStatus,
+  orderType,
   // setCheckUpdate,
 }) => {
   const [changeValue, setChangeValue] = useState(false);
   const [brand, setBrand] = useState(order?.Brand);
   const [quantity, setQuantity] = useState(order?.Quantity);
   const [priceVND, setPriceVND] = useState(order?.UPriceBuyVN);
-  const [priceOrigin, setPriceOrigin] = useState(
-    order?.PriceOrigin < order?.PricePromotion
-      ? order?.PriceOrigin
-      : order?.PricePromotion
-  );
+  const [priceOrigin, setPriceOrigin] = useState(() => {
+    if (orderType === 3) {
+      return order?.PriceOrigin;
+    } else {
+      return order?.PriceOrigin < order?.PricePromotion
+        ? order?.PriceOrigin
+        : order?.PricePromotion;
+    }
+  });
+
   // const [total, setTotal] = useState(order?.PriceVND);
   const [total, setTotal] = useState(order?.UPriceBuyVN * order?.Quantity);
 
