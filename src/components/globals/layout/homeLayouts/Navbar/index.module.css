@@ -1,0 +1,83 @@
+.navbar {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: white;
+}
+.navbar ul li a:hover {
+  color: #1890ff;
+}
+
+.MenuList {
+  min-width: 100%;
+  border: 0 !important;
+  display: flex;
+  margin: 0;
+}
+
+.MenuList li {
+  padding: 33px 10px;
+  align-items: center;
+  position: relative;
+}
+
+.MenuList a {
+  color: #2c2c2c !important;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.MenuList span:hover {
+  font-weight: 7000;
+}
+
+.MenuList a:hover {
+  font-weight: 7000;
+}
+
+.bgColor {
+  background-color: transparent !important;
+  color: #135963 !important;
+  font-size: 30px !important;
+  height: auto !important;
+}
+
+.MenuList span {
+  color: black;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.mobileVisible {
+  display: none;
+}
+
+.menuFoot {
+  background-color: #287cfb2b;
+  padding: 10px 5px;
+  border-radius: 8px;
+  box-shadow: 6px 5px 20px 0 #00000066;
+}
+
+@media screen and (max-width: 1025px) {
+  .mobileVisible {
+    display: block;
+  }
+
+  .mobileHidden .MenuList {
+    display: none;
+  }
+
+  .MenuList {
+    flex-direction: column;
+  }
+
+  .MenuList a {
+    color: #333 !important;
+  }
+}
+
+.mobileHidden ul {
+  background: none !important;
+}

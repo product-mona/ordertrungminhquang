@@ -1,0 +1,168 @@
+.InfoContact {
+  padding: 80px 0 0 0;
+  background-color: #fafafa;
+  position: relative;
+}
+
+.head {
+  text-align: center;
+}
+
+.InfoContact h1 {
+  font-weight: 700;
+  font-size: 40px !important;
+  line-height: 56px;
+  letter-spacing: 0.02em;
+  color: #4d4d4d;
+  text-transform: uppercase;
+}
+
+.map {
+  filter: brightness(0.8);
+}
+
+.form {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 4px 4px 0px 0px;
+  padding: 24px;
+  right: 100px;
+  top: 50px;
+  max-width: 380px;
+}
+
+.innerForm {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.InfoContact p {
+  font-size: 16px;
+  line-height: 24px;
+  width: 40%;
+  letter-spacing: 0.02em;
+  margin: auto;
+  color: #808080;
+}
+
+.formBox {
+  padding: 12px 16px;
+  border: none;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}
+
+.button {
+  @apply shadow-xl;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #089efb;
+  margin-left: auto;
+  margin-top: 16px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.button a {
+  font-weight: bold;
+  padding: 12px 16px;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #fff !important;
+  line-height: initial;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  background: #333;
+  box-shadow: none;
+}
+
+.button:hover a {
+  color: #fff !important;
+}
+
+.contactDetail {
+  width: 100%;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 16px 0px;
+  border-top: 1px solid #00000030;
+  margin-top: 16px;
+}
+
+.contactDetail a {
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.02em;
+  font-size: 16px;
+  line-height: 20px;
+  color: #4d4d4d;
+}
+.contactDetail a:first-child {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.contactDetail a img {
+  margin-right: 10px;
+}
+
+.showForm {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  background-color: #47b9fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 28px;
+  color: #fff;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+  .contactDetail a {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .showForm {
+    display: flex;
+  }
+  .InfoContact > div {
+    @apply grid-cols-1;
+    position: relative;
+  }
+
+  .form {
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    box-shadow: 0 0 10px 0 #00000059;
+  }
+
+  .contactDetail {
+    position: relative;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .form {
+    width: 90vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,266 @@
+.container {
+  padding-top: 12%;
+  padding-bottom: 14%;
+  position: relative;
+}
+
+.banner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 90px;
+  position: relative;
+}
+
+.content {
+  width: 100%;
+}
+
+.containerBanner {
+  background: #fafafa;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, 120%);
+  padding: 24px;
+}
+
+.extension,
+.text {
+  width: fit-content;
+}
+
+.text {
+  padding-left: 8%;
+}
+
+.btnExt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin: 10px;
+  margin-left: unset;
+  color: #333;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  background: #f5f5f5;
+}
+
+.btnExt::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.3;
+  top: 0;
+  left: auto;
+  right: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.btnExt:hover::after {
+  width: 100%;
+  left: 0;
+  right: auto;
+}
+
+.tabSearchChild {
+  @apply w-[48%];
+  border-radius: 4px;
+}
+
+.btnExt span {
+  margin-left: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #2c2c2c !important;
+  line-height: initial;
+}
+
+.tabSearch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tabSearchTitle {
+  color: #4d4d4d;
+  font-weight: 700;
+  display: block;
+  letter-spacing: 0.02em;
+}
+
+.formTracking .inputForm {
+  width: 100%;
+  height: 40px;
+  border: 2px solid rgb(230, 230, 230);
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+}
+
+.formTracking .inputForm input:focus {
+  outline: none;
+  box-shadow: 0 0 20px #9ecaed;
+}
+
+.formTracking .inputForm input {
+  width: 100%;
+  height: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  /* border-radius: 10px !important; */
+}
+
+.btnSearch {
+  height: 100%;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  background: #31a7fb;
+  border-radius: 4px;
+  box-shadow: 0 0 20px 0px #9c9c9c85;
+}
+
+.btnSearch span {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 12px 16px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out;
+}
+
+.exWrapper {
+  @apply mt-3 flex;
+}
+
+.btnSearch:hover {
+  box-shadow: 0 0 20px 0px transparent;
+  border-radius: 0;
+}
+
+.btnHome {
+  display: inline-block;
+  color: rgb(82, 81, 81) !important;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 18px;
+  position: relative;
+  left: 1058px;
+  bottom: 37px;
+}
+
+.extension {
+  margin-top: 10px;
+  margin-left: 250px;
+}
+
+.btnHome:hover {
+  background-color: white;
+  color: #f14f04 !important;
+}
+
+@media screen and (max-width: 1400px) {
+  .banner {
+    padding: 200px 40px 100px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .banner {
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+  .containerHome {
+    padding: 60px 20px 0;
+  }
+
+  .containerBanner {
+    bottom: 18%;
+    width: 90%;
+  }
+
+  .tabSearch {
+    flex-direction: column;
+  }
+
+  .tabSearchChild {
+    width: 100%;
+  }
+
+  .content {
+    flex-direction: column-reverse;
+  }
+
+  .exWrapper {
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .banner {
+    padding: 10px 0 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .slogan h1 {
+    font-size: 32px;
+  }
+
+  .containerHome {
+    padding: 60px 20px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+  .slogan h1 {
+    font-size: 18px;
+  }
+  .extension {
+    margin-top: 15px;
+    margin-left: 50px;
+  }
+
+  .banner {
+    padding: 100px 0 20px;
+  }
+  .btnSearch span {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btnExt img {
+    width: 15px !important;
+    height: 15px !important;
+  }
+  .btnExt span {
+    font-size: 12px;
+  }
+  .btnExt {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .tabSearch .formSearch select {
+    width: 130px;
+    font-size: 14px;
+  }
+  .tabSearch .formSearch .inputForm {
+    width: calc(100% - 130px);
+  }
+  .tabSearchChild {
+    margin-top: 16px;
+  }
+}
