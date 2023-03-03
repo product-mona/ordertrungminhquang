@@ -28,18 +28,18 @@ const ChangeChargeComponent = ({ control, data, RoleID }) => {
     <>
       <div className="flex items-center mt-4">
         <div className={costTitle}>Cân nặng - thể tích</div>
-        {(RoleID === 1 || RoleID === 3) && (
-          <Tooltip title="Check nếu muốn thay đổi cân nặng-thể tích!">
-            <FormCheckbox
-              control={control}
-              name="IsChangeTQVNWeight"
-              label=""
-              checkBoxClassName="large"
-            />
-          </Tooltip>
-        )}
         <div className={costBox}>
-          <div className="col-span-1">
+          <div className="col-span-1 flex items-center">
+            {(RoleID === 1 || RoleID === 3) && (
+              <Tooltip title="Check nếu muốn thay đổi cân nặng-thể tích!">
+                <FormCheckbox
+                  control={control}
+                  name="IsChangeTQVNWeight"
+                  label=""
+                  checkBoxClassName="large"
+                />
+              </Tooltip>
+            )}
             <FormInputNumber
               suffix=" KG"
               control={control}
@@ -65,18 +65,18 @@ const ChangeChargeComponent = ({ control, data, RoleID }) => {
         <div className={costTitle}>
           Phí vận chuyển TQ-VN (CK: {data?.FeeWeightCK ?? 0}%)
         </div>
-        <Tooltip title="Check nếu muốn thay đổi phí vận chuyển TQ-VN!">
-          {(RoleID === 1 || RoleID === 3) && (
-            <FormCheckbox
-              control={control}
-              name="IsChangeFeeWeight"
-              label=""
-              checkBoxClassName="large"
-            />
-          )}
-        </Tooltip>
         <div className={costBox}>
-          <div className="col-span-2">
+          <div className="col-span-2 flex items-center">
+            {(RoleID === 1 || RoleID === 3) && (
+              <Tooltip title="Check nếu muốn thay đổi phí vận chuyển TQ-VN!">
+                <FormCheckbox
+                  control={control}
+                  name="IsChangeFeeWeight"
+                  label=""
+                  checkBoxClassName="large"
+                />
+              </Tooltip>
+            )}
             <FormInputNumber
               suffix=" VNĐ"
               control={control}

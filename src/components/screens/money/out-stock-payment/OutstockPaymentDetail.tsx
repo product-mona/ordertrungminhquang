@@ -41,8 +41,6 @@ export const OutstockPaymentDetail: React.FC<
 > = ({ fetching, type, item, loading, handleUser, handleRefetch, user }) => {
   const componentRef = useRef<ReactToPrint>(null);
 
-  console.log(item);
-
   const { data: configData } = useQuery(
     ["configData"],
     () => configHomeData.get(),

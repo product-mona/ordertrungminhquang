@@ -34,8 +34,6 @@ export const OrderProductItem: React.FC<TProps> = ({
   // const [total, setTotal] = useState(order?.PriceVND);
   const [total, setTotal] = useState(order?.UPriceBuyVN * order?.Quantity);
 
-  console.log(order);
-
   function onChangeOrderBrand(e: React.ChangeEvent<HTMLInputElement>) {
     setChangeValue(true);
     setBrand(e.target.value);

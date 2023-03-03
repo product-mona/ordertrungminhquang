@@ -52,8 +52,6 @@ export const WithDrawalVNDForm: FC = () => {
   });
 
   const _onPress = (data: TWithDraw) => {
-    console.log(data);
-
     if (data?.Amount === 0) {
       toast.warn("Số tiền rút phải lớn hơn 0 đồng!");
       return;

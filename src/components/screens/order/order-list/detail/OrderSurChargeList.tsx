@@ -122,6 +122,7 @@ export const OrderSurChargeList: React.FC<TProps> = ({
         );
       },
       // responsive: ["xl"],
+      width: 90,
     },
   ];
 
