@@ -52,7 +52,7 @@ const Index: TNextPageWithLayout = () => {
         toast.update(id, {
           render: (error as any)?.response?.data?.ResultMessage,
           isLoading: false,
-          type: "success",
+          type: "error",
           autoClose: 1000,
         });
       });

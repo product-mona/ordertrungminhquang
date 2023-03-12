@@ -68,7 +68,7 @@ const Footer = ({ dataConfig, dataMenu }) => {
               <div className={styles.logo}>
                 <Link href="/">
                   <a className="w-[220px]">
-                    <img src={"/logo-removebg.png"} alt="" height={"auto"} />
+                    <img src={"/logo.png"} alt="" height={"auto"} />
                   </a>
                 </Link>
                 <div className={styles.socialFoot}>

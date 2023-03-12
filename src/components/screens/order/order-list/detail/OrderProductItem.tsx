@@ -96,7 +96,7 @@ export const OrderProductItem: React.FC<TProps> = ({
           </Tooltip>
           {(RoleID === 1 ||
             RoleID === 3 ||
-            (RoleID === 4 && dataStatus !== 5) ||
+            RoleID === 4 ||
             RoleID === 8 ||
             RoleID === 6 ||
             (RoleID === 7 && dataStatus !== 2)) && (
@@ -168,7 +168,7 @@ export const OrderProductItem: React.FC<TProps> = ({
                 disabled={
                   !(
                     RoleID === 1 ||
-                    (RoleID === 4 && dataStatus !== 5) ||
+                    RoleID === 4 ||
                     RoleID === 3 ||
                     (RoleID === 7 && dataStatus !== 2) ||
                     RoleID === 8 ||
@@ -195,7 +195,7 @@ export const OrderProductItem: React.FC<TProps> = ({
                     !(
                       RoleID === 1 ||
                       RoleID === 3 ||
-                      (RoleID === 4 && dataStatus !== 5) ||
+                      RoleID === 4 ||
                       (RoleID === 7 && dataStatus !== 2) ||
                       RoleID === 8 ||
                       RoleID === 6

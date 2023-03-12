@@ -1628,6 +1628,15 @@ tr:nth-child(even) {
   .leftSwiper .swiper-pagination-fraction {
     left: 8.8%;
   }
+
+  .ant-modal.homePopupNoti {
+    min-width: unset !important;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    max-width: unset;
+    margin: unset;
+  }
 }
 
 @media screen and (max-width: 520px) {

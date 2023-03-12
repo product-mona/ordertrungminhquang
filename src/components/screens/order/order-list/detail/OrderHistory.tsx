@@ -11,11 +11,17 @@ type TProps = {
 };
 
 export const OrderHistory: React.FC<TProps> = ({ data, loading }) => {
+  console.log(data);
+
   const paymentHistoryColumns: TColumnsType<TPayOrderHistory> = [
     {
       dataIndex: "Created",
       title: "Ngày thanh toán",
       render: (date) => _format.getVNDate(date),
+    },
+    {
+      dataIndex: "CreatedBy",
+      title: "Người Thực hiện",
     },
     {
       dataIndex: "StatusName",

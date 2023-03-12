@@ -24,7 +24,7 @@ export const AuthLayout: React.FC<{}> = ({ children }) => {
       <div className="form">
         <div className="logo">
           <Image
-            src={logo ?? "/logo-removebg.png"}
+            src={logo ?? "/logo.png"}
             alt="logo"
             width={"100%"}
             height={"auto"}

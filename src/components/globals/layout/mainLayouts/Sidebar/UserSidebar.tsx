@@ -49,14 +49,14 @@ const Sidebar: FC<TProps> = ({ handleHover, hover, tabbar }) => {
           <a className={clsx(styles.logo, "my-4")}>
             <span>
               <div className={styles.img}>
-                {/* <Image
-									src={logo ? logo : "/logo.png"}
-									width={"100%"}
-									height={"100%"}
-									alt="logo"
-									preview={false}
-								/> */}
-                <img src="/small_logo.png" alt="" />
+                <Image
+                  src={logo ? logo : "/favicon.png"}
+                  width={"100%"}
+                  height={"100%"}
+                  alt="logo"
+                  preview={false}
+                />
+                {/* <img src="/small_logo.png" alt="" /> */}
               </div>
             </span>
           </a>

@@ -1,6 +1,7 @@
+import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import { useQueryClient, useMutation } from "react-query";
+import { useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { user } from "~/api";
 import {
@@ -12,7 +13,6 @@ import {
   FormRadio,
   FormSelect,
   Modal,
-  showToast,
 } from "~/components";
 import {
   activeData,
@@ -21,15 +21,14 @@ import {
   genderData,
 } from "~/configs/appConfigs";
 import { TForm } from "~/types/table";
+import { _format } from "~/utils";
 import { checkUnique, createComplain, EUnique } from "../../auth/method";
 
-type TProps = TForm<TClient> & {
+type TProps = TForm<TEmployee> & {
   userLevelCatalogue: TUserLevelCatalogue[];
   userGroupCatalogue: TUserGroupCatalogue[];
   userSaleCatalogue: TUserCatalogue[];
   userOrderCatalogue: TUserCatalogue[];
-  refetch: () => void;
-  RoleID: number;
 };
 
 export const ClientListForm: FC<TProps> = ({
@@ -39,16 +38,13 @@ export const ClientListForm: FC<TProps> = ({
   userGroupCatalogue,
   userOrderCatalogue,
   userSaleCatalogue,
-  refetch,
-  RoleID,
 }) => {
+  const router = useRouter();
   const { handleSubmit, setValue, watch, reset, control } = useForm<
-    TClient & { UserGroupId: number }
+    TEmployee & { UserGroupId: number }
   >({
     mode: "onBlur",
-    defaultValues: {
-      Gender: 0,
-    },
+    defaultValues: { Gender: 0 },
   });
   const password = watch("Password");
 
@@ -57,8 +53,7 @@ export const ClientListForm: FC<TProps> = ({
       reset({
         Gender: EGenderData.FEMALE,
         LevelId: userLevelCatalogue?.[0]?.Id,
-        UserGroup: userGroupCatalogue?.[1],
-        UserGroupId: userGroupCatalogue?.[1].Id,
+        UserGroupId: userGroupCatalogue?.[1]?.Id,
         Status: EActiveData.Actived,
         IsAdmin: false,
         DatHangId: 0,
@@ -72,23 +67,30 @@ export const ClientListForm: FC<TProps> = ({
     }
   }, [visible]);
 
-  const mutationAdd = useMutation((data: TClient) => user.create(data), {
-    onSuccess: () => {
-      refetch();
-      mutationAdd.reset();
-      toast.success("Thêm khách hàng thành công");
-      onCancel();
-    },
-    onError: (error) =>
-      showToast({
-        title: (error as any)?.response?.data?.ResultCode,
-        message: (error as any)?.response?.data?.ResultMessage,
-        type: "error",
-      }),
-  });
+  const queryClient = useQueryClient();
 
   const _onPress = (data: TEmployee) => {
-    mutationAdd.mutate(data);
+    onCancel();
+    const id = toast.loading("Đang xử lý ...");
+    user
+      .create(data)
+      .then((res) => {
+        queryClient.invalidateQueries("clientData");
+        toast.update(id, {
+          render: "Thêm khách hàng thành công",
+          type: "success",
+          autoClose: 2000,
+          isLoading: false,
+        });
+      })
+      .catch((error) => {
+        toast.update(id, {
+          render: (error as any)?.response?.data?.ResultMessage,
+          type: "error",
+          autoClose: 2000,
+          isLoading: false,
+        });
+      });
   };
 
   return (
@@ -112,7 +114,7 @@ export const ClientListForm: FC<TProps> = ({
                 name="FullName"
                 label="Họ và tên"
                 placeholder=""
-                rules={{ required: "Không bỏ trống tên đăng nhập" }}
+                rules={{ required: "This field is required" }}
               />
             </div>
             <div className="col-span-1">
@@ -146,7 +148,7 @@ export const ClientListForm: FC<TProps> = ({
                 name="Birthday"
                 label="Ngày sinh"
                 placeholder=""
-                rules={{ required: "Không bỏ trống ngày sinh" }}
+                rules={{ required: "This field is required" }}
               />
             </div>
             <div className="col-span-1">
@@ -161,7 +163,7 @@ export const ClientListForm: FC<TProps> = ({
               <FormInput
                 control={control}
                 name="UserName"
-                label="Tên đăng nhập"
+                label="Tên đăng nhập / Nick name"
                 placeholder=""
                 rules={{
                   required: "Vui lòng điền thông tin đăng nhập",
@@ -175,6 +177,13 @@ export const ClientListForm: FC<TProps> = ({
                   },
                   validate: {
                     check: (value) => {
+                      const check = _format.checkUserNameVNese(value.trim());
+                      if (value.trim().includes(" ")) {
+                        return "username chứa khoảng trắng giữa 2 chữ!";
+                      }
+                      if (check) {
+                        return "Username không được chứa Tiếng Việt";
+                      }
                       return checkUnique(value.trim(), EUnique.username);
                     },
                   },
@@ -213,7 +222,22 @@ export const ClientListForm: FC<TProps> = ({
                     value: 8,
                     message: "Mật khẩu ít nhất 8 kí tự",
                   },
-                  required: "Vui lòng điền mật khẩu",
+                  validate: {
+                    check: (value) => {
+                      const check = _format.checkUserNameVNese(value.trim());
+
+                      if (value.trim() === "") {
+                        return "Vui lòng điền mật khẩu";
+                      }
+
+                      if (value.trim().includes(" ")) {
+                        return "Mật khẩu không chứa khoảng trắng giữa 2 chữ!";
+                      }
+                      if (check) {
+                        return "Mật khẩu không được chứa Tiếng Việt";
+                      }
+                    },
+                  },
                 }}
               />
             </div>
@@ -228,6 +252,18 @@ export const ClientListForm: FC<TProps> = ({
                   required: "Vui lòng xác nhận mật khẩu..",
                   validate: {
                     checkEqualPassword: (value) => {
+                      const check = _format.checkUserNameVNese(value.trim());
+
+                      if (value.trim() === "") {
+                        return "Vui lòng điền mật khẩu";
+                      }
+
+                      if (value.trim().includes(" ")) {
+                        return "Mật khẩu không chứa khoảng trắng giữa 2 chữ!";
+                      }
+                      if (check) {
+                        return "Mật khẩu không được chứa Tiếng Việt";
+                      }
                       return password === value.trim() || createComplain();
                     },
                   },
@@ -241,8 +277,10 @@ export const ClientListForm: FC<TProps> = ({
                 label="Nhân viên kinh doanh"
                 data={{ options: userSaleCatalogue }}
                 select={{ label: "FullName", value: "Id" }}
+                defaultValue={{ FullName: "Chọn nhân viên kinh doanh", Id: 0 }}
                 placeholder=""
                 required={false}
+                menuPlacement="bottom"
               />
             </div>
             <div className="col-span-1">
@@ -252,8 +290,10 @@ export const ClientListForm: FC<TProps> = ({
                 data={{ options: userOrderCatalogue }}
                 select={{ label: "FullName", value: "Id" }}
                 label="Nhân viên đặt hàng"
+                defaultValue={{ FullName: "Chọn nhân viên đặt hàng", Id: 0 }}
                 placeholder=""
                 required={false}
+                menuPlacement="bottom"
               />
             </div>
             <div className="col-span-1">
@@ -261,30 +301,34 @@ export const ClientListForm: FC<TProps> = ({
                 control={control}
                 name="UserGroupId"
                 data={{
-                  options: userGroupCatalogue?.filter((x) => x.Id === 2),
+                  options: router.asPath.includes("admin-management")
+                    ? userGroupCatalogue?.filter((x) => x.Id === 1)
+                    : userGroupCatalogue?.filter((x) => x.Id !== 1),
                 }}
-                defaultValue={userGroupCatalogue?.[1]}
                 select={{ label: "Description", value: "Id" }}
+                defaultValue={
+                  router.asPath.includes("admin-management")
+                    ? userGroupCatalogue?.filter((x) => x.Id === 1)?.[0]
+                    : userGroupCatalogue?.filter((x) => x.Id !== 1)?.[0]
+                }
                 label="Quyền hạn"
                 placeholder=""
-                rules={{ required: "Cấp quyền cho tài khoản mới!" }}
-                // disabled={RoleID === 1 || RoleID === 3 ? false : true}
-                disabled
+                required={false}
+                menuPlacement="bottom"
+                disabled={router.asPath.includes("admin-management")}
               />
             </div>
             <div className="col-span-1">
               <FormAsyncSelect
                 control={control}
                 name="LevelId"
-                data={{
-                  options: userLevelCatalogue,
-                }}
+                data={{ options: userLevelCatalogue }}
                 defaultValue={userLevelCatalogue?.[0]}
                 select={{ label: "Name", value: "Id" }}
                 label="Level"
                 placeholder=""
-                menuPlacement="top"
-                rules={{ required: "Chọn cấp cho tài khoản" }}
+                menuPlacement="bottom"
+                required={false}
               />
             </div>
             <div className="col-span-2">
@@ -294,10 +338,11 @@ export const ClientListForm: FC<TProps> = ({
                 data={activeData.slice(1)}
                 label="Trạng thái tài khoản"
                 placeholder=""
-                menuPlacement="top"
+                menuPlacement="bottom"
                 defaultValue={activeData[1]}
+                rules={{ required: "Vui lòng chọn thông tin!" }}
                 required={false}
-                callback={async () =>
+                callback={() =>
                   setValue(
                     "IsLocked",
                     watch("Status") === EActiveData.Blocked ? true : false

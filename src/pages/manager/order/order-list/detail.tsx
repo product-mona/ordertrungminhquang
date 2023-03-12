@@ -79,7 +79,7 @@ const Index: TNextPageWithLayout = () => {
       onError: toast.error,
       retry: false,
       enabled: !!+query?.id,
-      keepPreviousData: true,
+      // keepPreviousData: true,
       // enabled: false,
       // refetchOnMount: "always",
       refetchOnWindowFocus: false,

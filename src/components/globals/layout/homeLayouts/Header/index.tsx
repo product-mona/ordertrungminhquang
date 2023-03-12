@@ -276,7 +276,7 @@ const Header = ({ dataConfig, dataMenu }) => {
                     <div className={styles.logo}>
                       <Image
                         // src="/logo.jpg"
-                        src="/logo-removebg.png"
+                        src="/logo.png"
                         alt=""
                         width={"100%"}
                         height={"auto"}

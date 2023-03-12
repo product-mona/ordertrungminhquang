@@ -16,10 +16,6 @@ type TProps = {
         Id: number;
         TotalPriceVND: number;
         Status: number;
-        // IsPacked: boolean;
-        // IsInsurance: boolean;
-        // IsFastDelivery: boolean;
-        // IsCheckProduct: boolean;
       });
   RoleID: number;
 };
@@ -168,7 +164,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 !(
                   RoleID === 1 ||
                   RoleID === 3 ||
-                  (RoleID === 4 && !(data?.Status === 5)) ||
+                  (RoleID === 4 && data?.Status < 5) ||
                   RoleID === 8 ||
                   RoleID === 6
                 )
@@ -218,7 +214,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 !(
                   RoleID === 1 ||
                   RoleID === 3 ||
-                  (RoleID === 4 && !(data?.Status === 5)) ||
+                  (RoleID === 4 && data?.Status <= 5) ||
                   RoleID === 8 ||
                   RoleID === 6
                 )
@@ -264,7 +260,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 !(
                   RoleID === 1 ||
                   RoleID === 3 ||
-                  (RoleID === 4 && !(data?.Status === 5)) ||
+                  (RoleID === 4 && data?.Status < 5) ||
                   RoleID === 8 ||
                   RoleID === 6
                 )
@@ -364,6 +360,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
       </div>
       <ChangeChargeComponent control={control} data={data} RoleID={RoleID} />
 
+      {/*  4 serve */}
       <div className="my-4 text-base font-bold py-2 uppercase border-b border-main">
         Phí tùy chọn
       </div>
@@ -378,7 +375,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               !(
                 RoleID === 1 ||
                 RoleID === 3 ||
-                (RoleID === 4 && !(data?.Status === 5)) ||
+                (RoleID === 4 && data?.Status < 5) ||
                 RoleID === 8 ||
                 RoleID === 6
               )
@@ -396,7 +393,14 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               placeholder=""
               allowNegative={false}
               callback={(val) => {
-                handleSetValue("IsCheckProduct", val > 0 ? true : false);
+                handleSetValue(
+                  "IsCheckProduct",
+                  all.IsCheckProduct
+                    ? all.IsCheckProduct
+                    : val > 0
+                    ? true
+                    : false
+                );
                 if (val !== formValue.IsCheckProductPriceCNY) {
                   handleSetValue(
                     "IsCheckProductPrice",
@@ -433,13 +437,13 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
           <FormCheckbox
             control={control}
             name="IsPacked"
-            label=""
+            label={``}
             checkBoxClassName="large"
             disabled={
               !(
                 RoleID === 1 ||
                 RoleID === 3 ||
-                (RoleID === 4 && !(data?.Status === 5)) ||
+                (RoleID === 4 && data?.Status < 5) ||
                 RoleID === 8 ||
                 RoleID === 6
               )
@@ -458,7 +462,10 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               placeholder="Nhập phí đóng gỗ (¥)"
               allowNegative={false}
               callback={(val) => {
-                handleSetValue("IsPacked", val > 0 ? true : false);
+                handleSetValue(
+                  "IsPacked",
+                  all.IsPacked ? all.IsPacked : val > 0 ? true : false
+                );
                 if (val !== formValue.IsPackedPriceCNY) {
                   handleSetValue(
                     "IsPackedPrice",
@@ -470,7 +477,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 !(
                   RoleID === 1 ||
                   RoleID === 3 ||
-                  (RoleID === 4 && !(data?.Status === 5)) ||
+                  (RoleID === 4 && data?.Status < 5) ||
                   RoleID === 8 ||
                   RoleID === 6
                 )
@@ -496,7 +503,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
                 !(
                   RoleID === 1 ||
                   RoleID === 3 ||
-                  (RoleID === 4 && !(data?.Status === 5)) ||
+                  (RoleID === 4 && data?.Status <= 5) ||
                   RoleID === 8 ||
                   RoleID === 6
                 )
@@ -517,7 +524,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               !(
                 RoleID === 1 ||
                 RoleID === 3 ||
-                (RoleID === 4 && !(data?.Status === 5)) ||
+                (RoleID === 4 && data?.Status < 5) ||
                 RoleID === 8 ||
                 RoleID === 6
               )
@@ -551,7 +558,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               !(
                 RoleID === 1 ||
                 RoleID === 3 ||
-                (RoleID === 4 && !(data?.Status === 5)) ||
+                (RoleID === 4 && data?.Status < 5) ||
                 RoleID === 8 ||
                 RoleID === 6
               )
@@ -568,13 +575,20 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               placeholder="Nhập phí giao hàng (VNĐ)"
               allowNegative={false}
               callback={(val) => {
-                handleSetValue("IsFastDelivery", val > 0 ? true : false);
+                handleSetValue(
+                  "IsFastDelivery",
+                  all.IsFastDelivery
+                    ? all.IsFastDelivery
+                    : val > 0
+                    ? true
+                    : false
+                );
               }}
               disabled={
                 !(
                   RoleID === 1 ||
                   RoleID === 3 ||
-                  (RoleID === 4 && !(data?.Status === 5)) ||
+                  (RoleID === 4 && data?.Status < 5) ||
                   RoleID === 8 ||
                   RoleID === 6
                 )
@@ -584,6 +598,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
         </div>
       </div>
 
+      {/* Payment charge */}
       <div className="my-4 text-base font-bold py-2 uppercase border-b border-main">
         Thanh toán
       </div>
@@ -600,12 +615,14 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               placeholder=""
               allowNegative={false}
               disabled={
-                !(
+                (!(
                   RoleID === 1 ||
                   RoleID === 3 ||
                   RoleID === 8 ||
                   RoleID === 6
-                ) && RoleID === 4
+                ) &&
+                  RoleID === 4) ||
+                RoleID === 7
               }
               callback={(val) => {
                 if (val > data?.TotalPriceVND) {
@@ -631,13 +648,7 @@ export const OrderCost: React.FC<TProps> = ({ loading, data, RoleID }) => {
               placeholder=""
               allowNegative={false}
               disabled={
-                !(
-                  RoleID === 1 ||
-                  RoleID === 3 ||
-                  (RoleID === 4 && !(data?.Status === 5)) ||
-                  RoleID === 8 ||
-                  RoleID === 6
-                )
+                !(RoleID === 1 || RoleID === 3 || RoleID === 8 || RoleID === 6)
               }
             />
           </div>

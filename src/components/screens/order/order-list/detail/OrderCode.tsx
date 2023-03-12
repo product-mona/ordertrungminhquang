@@ -87,7 +87,10 @@ export const OrderCode: React.FC<TProps> = ({
             ) {
               await mainOrderCode
                 .create({ MainOrderId: data?.Id, Code })
-                .then((res) => append(res?.Data))
+                .then((res) => {
+                  refetch();
+                  append(res?.Data);
+                })
                 .catch(toast.error);
             } else {
               toast.warning("Đã trùng mã đơn hàng");

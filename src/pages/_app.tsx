@@ -24,8 +24,8 @@ import "antd/dist/antd.less";
 import "nprogress/nprogress.css";
 import "tippy.js/dist/tippy.css";
 import "~/assets/css/main.scss";
-import "../../styles/globals.css";
-import "../../styles/styles.css";
+import "../styles/globals.css";
+import "../styles/styles.css";
 import "../assets/fontawesome/css/all.min.css";
 // signalR
 import BlankLayout from "~/components/globals/layout/blankLayouts";

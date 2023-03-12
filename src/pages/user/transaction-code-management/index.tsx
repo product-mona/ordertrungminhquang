@@ -1,5 +1,5 @@
 import router from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { smallPackage } from "~/api";
 import {
@@ -17,7 +17,6 @@ import { selectUser, useAppSelector } from "~/store";
 
 const Index: TNextPageWithLayout = () => {
   const { user: userStore } = useAppSelector(selectUser);
-  if (!userStore) return null;
 
   const [filter, setFilter] = useState({
     SearchType: null,
@@ -30,8 +29,12 @@ const Index: TNextPageWithLayout = () => {
     PageSize: 20,
     PageIndex: 1,
     Menu: 2,
-    UID: userStore.UserId,
+    UID: userStore?.UserId,
   });
+
+  useEffect(() => {
+    setFilter({ ...filter, UID: userStore?.UserId });
+  }, [filter]);
 
   const handleFilter = (newFilter) => {
     setFilter({ ...filter, ...newFilter });

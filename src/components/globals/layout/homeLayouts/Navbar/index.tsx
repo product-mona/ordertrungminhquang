@@ -140,7 +140,7 @@ const Navbar = ({ dataConfig, dataMenu }) => {
         </Button>
         {/* `${dataConfig?.CompanyLongName}` */}
         <Drawer
-          title={<Image src="/logo-removebg.png" preview={false} />}
+          title={<Image src="/logo.png" preview={false} />}
           placement="left"
           width={300}
           onClose={() => setVisible(false)}

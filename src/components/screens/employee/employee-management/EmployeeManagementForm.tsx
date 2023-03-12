@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import { user } from "~/api";
 import {
   Button,
@@ -12,8 +13,6 @@ import {
   FormRadio,
   FormSelect,
   Modal,
-  showToast,
-  toast,
 } from "~/components";
 import {
   activeData,
@@ -22,6 +21,8 @@ import {
   genderData,
 } from "~/configs/appConfigs";
 import { TForm } from "~/types/table";
+import { _format } from "~/utils";
+import { checkUnique, createComplain, EUnique } from "../../auth/method";
 
 type TProps = TForm<TEmployee> & {
   userLevelCatalogue: TUserLevelCatalogue[];
@@ -45,6 +46,7 @@ export const EmployeeManagementForm: FC<TProps> = ({
     mode: "onBlur",
     defaultValues: { Gender: 0 },
   });
+  const password = watch("Password");
 
   React.useEffect(() => {
     if (visible) {
@@ -66,18 +68,30 @@ export const EmployeeManagementForm: FC<TProps> = ({
   }, [visible]);
 
   const queryClient = useQueryClient();
-  const mutationAdd = useMutation((data: TEmployee) => user.create(data), {
-    // refresh item + table data after adding successfully
-    onSuccess: () => {
-      onCancel();
-      queryClient.invalidateQueries("employeeData");
-      mutationAdd.reset();
-      toast.success("Thêm nhân viên thành công");
-    },
-    onError: toast.error,
-  });
 
-  const _onPress = (data: TEmployee) => mutationAdd.mutate(data);
+  const _onPress = (data: TEmployee) => {
+    onCancel();
+    const id = toast.loading("Đang xử lý ...");
+    user
+      .create(data)
+      .then((res) => {
+        queryClient.invalidateQueries("employeeData");
+        toast.update(id, {
+          render: "Thêm nhân viên thành công",
+          type: "success",
+          autoClose: 2000,
+          isLoading: false,
+        });
+      })
+      .catch((error) => {
+        toast.update(id, {
+          render: (error as any)?.response?.data?.ResultMessage,
+          type: "error",
+          autoClose: 2000,
+          isLoading: false,
+        });
+      });
+  };
 
   return (
     <Modal
@@ -109,7 +123,23 @@ export const EmployeeManagementForm: FC<TProps> = ({
                 name="Phone"
                 label="Số điện thoại"
                 placeholder=""
-                rules={{ required: "This field is required" }}
+                rules={{
+                  required: "Vui lòng điền số điện thoại..",
+                  minLength: {
+                    value: 10,
+                    message: "Số điện thoại tối thiểu 10 số!",
+                  },
+                  pattern: {
+                    value:
+                      /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+                    message: "Sđt không đúng định dạng",
+                  },
+                  validate: {
+                    check: (value) => {
+                      return checkUnique(value.trim(), EUnique.phone);
+                    },
+                  },
+                }}
               />
             </div>
             <div className="col-span-1">
@@ -135,7 +165,29 @@ export const EmployeeManagementForm: FC<TProps> = ({
                 name="UserName"
                 label="Tên đăng nhập / Nick name"
                 placeholder=""
-                rules={{ required: "This field is required" }}
+                rules={{
+                  required: "Vui lòng điền thông tin đăng nhập",
+                  minLength: {
+                    value: 6,
+                    message: "username phải ít nhất 6 kí tự",
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: "username phải ít hơn 30 kí tự",
+                  },
+                  validate: {
+                    check: (value) => {
+                      const check = _format.checkUserNameVNese(value.trim());
+                      if (value.trim().includes(" ")) {
+                        return "username chứa khoảng trắng giữa 2 chữ!";
+                      }
+                      if (check) {
+                        return "Username không được chứa Tiếng Việt";
+                      }
+                      return checkUnique(value.trim(), EUnique.username);
+                    },
+                  },
+                }}
               />
             </div>
             <div className="col-span-1">
@@ -144,7 +196,18 @@ export const EmployeeManagementForm: FC<TProps> = ({
                 name="Email"
                 label="Email"
                 placeholder=""
-                rules={{ required: "This field is required" }}
+                rules={{
+                  required: "Vui lòng điền email..",
+                  pattern: {
+                    value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                    message: "email không đúng định dạng",
+                  },
+                  validate: {
+                    check: (value) => {
+                      return checkUnique(value.trim(), EUnique.email);
+                    },
+                  },
+                }}
               />
             </div>
             <div className="col-span-1">
@@ -154,7 +217,28 @@ export const EmployeeManagementForm: FC<TProps> = ({
                 label="Mật khẩu"
                 placeholder=""
                 type="password"
-                rules={{ required: "This field is required" }}
+                rules={{
+                  minLength: {
+                    value: 8,
+                    message: "Mật khẩu ít nhất 8 kí tự",
+                  },
+                  validate: {
+                    check: (value) => {
+                      const check = _format.checkUserNameVNese(value.trim());
+
+                      if (value.trim() === "") {
+                        return "Vui lòng điền mật khẩu";
+                      }
+
+                      if (value.trim().includes(" ")) {
+                        return "Mật khẩu không chứa khoảng trắng giữa 2 chữ!";
+                      }
+                      if (check) {
+                        return "Mật khẩu không được chứa Tiếng Việt";
+                      }
+                    },
+                  },
+                }}
               />
             </div>
             <div className="col-span-1">
@@ -164,7 +248,26 @@ export const EmployeeManagementForm: FC<TProps> = ({
                 label="Nhập lại mật khẩu"
                 type="password"
                 placeholder=""
-                rules={{ required: "This field is required" }}
+                rules={{
+                  required: "Vui lòng xác nhận mật khẩu..",
+                  validate: {
+                    checkEqualPassword: (value) => {
+                      const check = _format.checkUserNameVNese(value.trim());
+
+                      if (value.trim() === "") {
+                        return "Vui lòng điền mật khẩu";
+                      }
+
+                      if (value.trim().includes(" ")) {
+                        return "Mật khẩu không chứa khoảng trắng giữa 2 chữ!";
+                      }
+                      if (check) {
+                        return "Mật khẩu không được chứa Tiếng Việt";
+                      }
+                      return password === value.trim() || createComplain();
+                    },
+                  },
+                }}
               />
             </div>
             <div className="col-span-1">
