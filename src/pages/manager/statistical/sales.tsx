@@ -41,50 +41,50 @@ const Index: TNextPageWithLayout = () => {
     setOrderPagination(defaultPagination);
   };
 
-  const {
-    data: userPaymentReportData,
-    isFetching: isFetchingPayment,
-    isLoading: isLoadingPayment,
-  } = useQuery(
-    [
-      "clientPaymentReportData",
-      {
-        Current: paymentPagination.current,
-        PageSize: paymentPagination.pageSize,
-        fromDate,
-        toDate,
-        UID: newUser?.UserId,
-        RoleID: newUser?.UserGroupId,
-      },
-    ],
-    () =>
-      reportPayOrderHistory
-        .getList({
-          PageIndex: paymentPagination.current,
-          PageSize: paymentPagination.pageSize,
-          OrderBy: "Id desc",
-          FromDate: fromDate,
-          ToDate: toDate,
-          UID: newUser?.UserId,
-          RoleID: newUser?.UserGroupId,
-        })
-        .then((res) => res.Data),
-    {
-      onSuccess: (data) => {
-        setPaymentPagination({
-          ...paymentPagination,
-          total: data?.TotalItem,
-        });
-      },
-      onError: () => {
-        showToast({
-          title: "Lỗi!",
-          message: "Đường truyền kết nối server bị lỗi! Vui lòng thử lại!",
-          type: "error",
-        });
-      },
-    }
-  );
+  // const {
+  //   data: userPaymentReportData,
+  //   isFetching: isFetchingPayment,
+  //   isLoading: isLoadingPayment,
+  // } = useQuery(
+  //   [
+  //     "clientPaymentReportData",
+  //     {
+  //       Current: paymentPagination.current,
+  //       PageSize: paymentPagination.pageSize,
+  //       fromDate,
+  //       toDate,
+  //       UID: newUser?.UserId,
+  //       RoleID: newUser?.UserGroupId,
+  //     },
+  //   ],
+  //   () =>
+  //     reportPayOrderHistory
+  //       .getList({
+  //         PageIndex: paymentPagination.current,
+  //         PageSize: paymentPagination.pageSize,
+  //         OrderBy: "Id desc",
+  //         FromDate: fromDate,
+  //         ToDate: toDate,
+  //         UID: newUser?.UserId,
+  //         RoleID: newUser?.UserGroupId,
+  //       })
+  //       .then((res) => res.Data),
+  //   {
+  //     onSuccess: (data) => {
+  //       setPaymentPagination({
+  //         ...paymentPagination,
+  //         total: data?.TotalItem,
+  //       });
+  //     },
+  //     onError: () => {
+  //       showToast({
+  //         title: "Lỗi!",
+  //         message: "Đường truyền kết nối server bị lỗi! Vui lòng thử lại!",
+  //         type: "error",
+  //       });
+  //     },
+  //   }
+  // );
 
   const {
     data: userOrderReportData,
@@ -156,17 +156,17 @@ const Index: TNextPageWithLayout = () => {
     }
   );
 
-  const handleExportExcelPayment = async () => {
-    try {
-      const res = await reportPayOrderHistory.export({
-        UID: newUser?.UserId,
-        RoleID: newUser?.UserGroupId,
-      });
-      router.push(`${res.Data}`);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+  // const handleExportExcelPayment = async () => {
+  //   try {
+  //     const res = await reportPayOrderHistory.export({
+  //       UID: newUser?.UserId,
+  //       RoleID: newUser?.UserGroupId,
+  //     });
+  //     router.push(`${res.Data}`);
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
 
   const handleExportExcelOrder = async () => {
     try {

@@ -24,7 +24,6 @@ export const TheMostBalance = () => {
         })
         .then((res) => res.Data.Items),
     {
-      keepPreviousData: true,
       onError: (error) =>
         showToast({
           title: "Đã xảy ra lỗi!",
@@ -109,7 +108,7 @@ export const TheMostBalance = () => {
           data,
           loading: isFetching,
           style: "secondary",
-          title: "Khách hàng có số dư nhiều nhất",
+          title: "Khách hàng có số nạp nhiều nhất",
           // expandable: expandable,
         }}
       />

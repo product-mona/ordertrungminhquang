@@ -807,9 +807,9 @@ span.create .ant-upload.ant-upload-select-picture-card {
 }
 
 .ant-collapse-header {
+  @apply bg-main;
   color: #fff !important;
   font-weight: 600;
-  background-color: #0c5963;
 }
 
 .collapse-order .ant-collapse-header > div {

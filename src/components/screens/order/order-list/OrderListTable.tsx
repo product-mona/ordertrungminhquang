@@ -56,7 +56,7 @@ export const OrderListTable: React.FC<
     },
     {
       dataIndex: "ImageOrigin",
-      title: "Ảnh sản phẩm",
+      title: "Ảnh",
       align: "center",
       render: (img) => (
         <div className="flex items-center justify-center">

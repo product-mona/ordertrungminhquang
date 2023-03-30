@@ -1,22 +1,26 @@
-.table table > thead > tr > th {
-  padding: 8px;
-  font-size: small;
-  font-weight: 600;
-  color: red !important;
-}
-
 .table table > thead > tr > th::before {
   content: unset !important;
 }
 
-.maintable table > thead > tr > th {
+.maintable table > thead > tr > th,
+.table table > thead > tr > th {
+  /* @apply !text-white !bg-sec; */
   padding: 10px;
-  font-size: small;
-  font-weight: 600;
-  color: red !important;
+  font-weight: 700;
   white-space: nowrap;
+  text-transform: uppercase;
+  border-right: 1px solid #f825021a !important;
+  font-size: 12px !important;
+  border-bottom: 0;
+  line-height: initial;
+  color: red;
   text-align: center;
 }
+
+.maintable table > thead > tr > th:last-of-type,
+.table table > thead > tr > th:last-of-type {
+  border-right: none !important;
+} 
 
 .table table > tbody > tr > td,
 .maintable table > tbody > tr > td,
@@ -26,3 +30,10 @@
   padding: 8px;
   height: 45px;
 }
+
+
+
+/* 
+  color: #6b6f82;
+
+ */

@@ -304,7 +304,7 @@ const Menus: FC<TMenu> = ({
                       <a className="popover-a">
                         <span>
                           <i
-                            className={clsx("fas fa-play", styles.icon)}
+                            className={clsx("fas fa-play !text-main", styles.icon)}
                             style={{
                               fontSize: 10,
                               textAlign: "center",
@@ -380,7 +380,7 @@ const Menus: FC<TMenu> = ({
                       <a className="popover-a">
                         <span>
                           <i
-                            className={clsx("fas fa-play", styles.icon)}
+                            className={clsx("fas fa-play !text-main", styles.icon)}
                             style={{
                               fontSize: 10,
                               textAlign: "center",

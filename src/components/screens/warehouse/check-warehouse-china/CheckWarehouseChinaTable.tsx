@@ -1,7 +1,7 @@
-import { Input, Popconfirm, Tooltip } from "antd";
+import { Input } from "antd";
 import JsBarcode from "jsbarcode";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import {
   ActionButton,
@@ -89,10 +89,12 @@ export const CheckWarehouseChinaTable: React.FC<
       title: "Loại ĐH",
       responsive: ["xl"],
       fixed: "left",
+      width: 100,
     },
     {
       dataIndex: "IsPackged",
       title: "Đơn hàng",
+      width: 100,
       render: (_, record) => (
         <div className="flex justify-center flex-col items-center">
           <div className="flex justify-evenly w-full">
@@ -150,7 +152,7 @@ export const CheckWarehouseChinaTable: React.FC<
       dataIndex: "TotalOrderQuantity",
       title: "Số lượng",
       align: "right",
-      width: 70,
+      width: 100,
       responsive: ["md"],
       render: (_, record) => {
         return (
@@ -181,6 +183,7 @@ export const CheckWarehouseChinaTable: React.FC<
       dataIndex: "Weight",
       title: "Cân nặng (kg)",
       align: "right",
+      width: 120,
       render: (_, __, index) => (
         <FormInputNumber
           control={control}
@@ -195,6 +198,7 @@ export const CheckWarehouseChinaTable: React.FC<
       dataIndex: "Width",
       title: "Kích thước",
       align: "right",
+      width: 100,
       render: (_, __, index) => {
         return (
           <React.Fragment>
@@ -294,6 +298,7 @@ export const CheckWarehouseChinaTable: React.FC<
     {
       dataIndex: "ProductType",
       title: "Loại sản phẩm",
+      width: 120,
       render: (_, __, index) => (
         <FormInput
           control={control}
@@ -307,6 +312,7 @@ export const CheckWarehouseChinaTable: React.FC<
     {
       dataIndex: "StaffNoteCheck",
       title: "NV Kho KD",
+      width: 120,
       render: (_, __, index) => (
         <FormInput
           control={control}
@@ -332,6 +338,7 @@ export const CheckWarehouseChinaTable: React.FC<
         />
       ),
       responsive: ["xl"],
+      width: 100,
     },
     {
       dataIndex: "UserNote",
@@ -346,11 +353,13 @@ export const CheckWarehouseChinaTable: React.FC<
           onEnter={handleSubmit((data) => onPress([data[name][index]]))}
         />
       ),
+      width: 120,
       responsive: ["xl"],
     },
     {
       dataIndex: "IMG",
       title: "Hình ảnh",
+      width: 120,
       align: "center",
       render: (_, __, index) => (
         <FormUpload
@@ -403,6 +412,7 @@ export const CheckWarehouseChinaTable: React.FC<
       dataIndex: "action",
       title: "Action",
       align: "right",
+      width: 120,
       render: (_, record, index) => (
         <React.Fragment>
           {record.Status <= ESmallPackageStatusData.ArrivedToChinaWarehouse && (
@@ -617,25 +627,25 @@ export const CheckWarehouseChinaTable: React.FC<
         </div>
       ),
       fixed: "left",
-      width: 70,
+      width: 120,
     },
     {
       dataIndex: "OrderTransactionCode",
       title: "Mã vận đơn",
       className: "break-words words-break",
-      width: 80,
+      width: 120,
       fixed: "left",
     },
     {
       dataIndex: "OrderTypeName",
       title: "Loại ĐH",
-      width: 120,
+      width: 100,
     },
     {
       dataIndex: "TotalOrder",
       title: "Số loại",
       align: "right",
-      width: 70,
+      width: 80,
       render: (_) => {
         return (
           <Input
@@ -650,7 +660,7 @@ export const CheckWarehouseChinaTable: React.FC<
       dataIndex: "TotalOrderQuantity",
       title: "Số lượng",
       align: "right",
-      width: 70,
+      width: 100,
       render: (_) => {
         return (
           <Input
@@ -689,13 +699,13 @@ export const CheckWarehouseChinaTable: React.FC<
           onEnter={handleSubmit((data) => onPress([data[name][index]]))}
         />
       ),
-      width: 100,
+      width: 120,
     },
     {
       dataIndex: "Width",
       title: "Kích thước",
       align: "right",
-      width: 100,
+      width: 120,
       render: (_, __, index) => (
         <React.Fragment>
           <div className="flex items-center">
@@ -785,7 +795,7 @@ export const CheckWarehouseChinaTable: React.FC<
     {
       dataIndex: "UserNote",
       title: "Khách ghi chú",
-      width: 100,
+      width: 120,
       render: (_, __, index) => (
         <FormTextarea
           control={control}
@@ -808,7 +818,7 @@ export const CheckWarehouseChinaTable: React.FC<
           image
         />
       ),
-      width: 100,
+      width: 120,
     },
     {
       dataIndex: "Status",
@@ -852,7 +862,7 @@ export const CheckWarehouseChinaTable: React.FC<
       dataIndex: "action",
       title: "Thao tác",
       align: "right",
-      width: 100,
+      width: 120,
       render: (_, record, index) => (
         <React.Fragment>
           {record.Status <=

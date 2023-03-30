@@ -118,10 +118,9 @@ export const UserLayout: FC<{}> = ({ children }) => {
           direction="right"
           speed={70}
           gradient={false}
+          className="text-main"
           style={{
             height: "36px",
-            background: "#0c5964db",
-            color: "#fff",
             fontSize: "20px",
             fontWeight: "bold",
             textTransform: "uppercase",
@@ -184,12 +183,19 @@ const Menus: FC<TMenu> = ({
   sidebarTabbar,
 }) => {
   return (
-    <ul className="" style={{ width: "calc(7/12 * 100%)" }}>
+    <ul className="!mb-[4px]" style={{ width: "calc(7/12 * 100%)" }}>
       <li onClick={handleDropdown} className={`${styles.item}`}>
         {!childrens?.length ? (
           <>
             <Link href={path}>
               <a className={clsx(styles.link, activeRouter && styles.active)}>
+                {
+                  <span
+                    className={`${styles.activeLine} ${
+                      activeRouter ? "block" : "hidden"
+                    }`}
+                  ></span>
+                }
                 <span className={clsx(styles.span, "mb-4")}>
                   <i className={clsx(icon, styles.icon)}></i>
                 </span>
@@ -206,6 +212,13 @@ const Menus: FC<TMenu> = ({
           </>
         ) : (
           <a className={clsx(styles.link, activeRouter && styles.active)}>
+            {
+              <span
+                className={`${styles.activeLine} ${
+                  activeRouter ? "block" : "hidden"
+                }`}
+              ></span>
+            }
             <span className={clsx(styles.span, "mb-4")}>
               <i className={clsx(icon, styles.icon)}></i>
             </span>

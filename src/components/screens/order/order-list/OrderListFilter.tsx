@@ -269,6 +269,7 @@ export const OrderListFilter: FC<TProps> = ({
                     ToDate: ToDate.current,
                     IsNotMainOrderCode: IsNotMainOrderCode.current,
                     PageIndex: 1,
+                    PageSize: IsNotMainOrderCode.current ? 99999: 20,
                   })
                 }
                 icon="fas fa-filter"
@@ -300,6 +301,7 @@ export const OrderListFilter: FC<TProps> = ({
                   ToDate: null,
                   IsNotMainOrderCode: null,
                   PageIndex: 1,
+                  // PageSize: 20,
                 });
               }}
             >

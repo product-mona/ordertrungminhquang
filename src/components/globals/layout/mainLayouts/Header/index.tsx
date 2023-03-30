@@ -118,7 +118,7 @@ const Header: React.FC<TProps> = ({
         className={clsx(
           styles.header,
           "xl:flex xl:w-unset sm:fixed xl:relative sm:h-[54px] xl:h-fit",
-          userPage !== true && "!fixed !h-[54px]",
+          userPage !== true && "!fixed !h-[54px] shadow-lg",
           userPage && `xl:!w-[100%]`
         )}
       >
@@ -133,7 +133,7 @@ const Header: React.FC<TProps> = ({
               )}
             >
               <button
-                className={clsx(styles.action, "text-[#fff]")}
+                className={clsx(styles.action, "text-[#666]")}
                 onClick={() => handleHover(!hover)}
               >
                 <div className={styles.openMenu}>
@@ -150,10 +150,13 @@ const Header: React.FC<TProps> = ({
                 <div className={`${styles.img} w-[50px]`}>
                   <Image
                     src={configData?.LogoIMG}
-                    width={"5.5rem"}
+                    width={"6rem"}
                     height={"100%"}
                     alt="logo"
                     preview={false}
+                    style={{
+                      filter: 'unset'
+                    }}
                   />
                 </div>
               </a>
@@ -189,10 +192,10 @@ const Header: React.FC<TProps> = ({
             <div
               className={`xl:flex items-center rounded-md px-2 ${styles.block}`}
             >
-              <span className="!mr-2 text-[#fff] text-sm font-normal">
+              <span className="!mr-2 text-black text-sm font-bold">
                 Tỉ giá
               </span>
-              <span className="!font-bold xl:!text-sm !text-xs flex items-center !text-[#fff]">
+              <span className="!font-bold xl:!text-sm !text-xs flex items-center !text-main">
                 1¥ = {_format.getVND(configData?.Currency, " VNĐ")}
               </span>
             </div>
@@ -206,10 +209,10 @@ const Header: React.FC<TProps> = ({
                 "xl:flex items-center rounded-md px-2"
               )}
             >
-              <span className="!mr-2 text-sm font-normal text-[#fff]">
+              <span className="!mr-2 text-sm font-bold text-black">
                 Số dư
               </span>
-              <span className="font-bold xl:text-sm text-xs flex items-center text-[#fff]">
+              <span className="font-bold xl:text-sm text-xs flex items-center text-main">
                 {dataUser?.Data?.Wallet !== 0
                   ? _format.getVND(dataUser?.Data?.Wallet)
                   : "0 VNĐ"}
@@ -226,7 +229,7 @@ const Header: React.FC<TProps> = ({
               className={clsx(
                 styles.block,
                 styles.actionInfo,
-                "!flex items-center rounded-xl !px-2 !py-[4px] bg-[#fff]"
+                "!flex items-center rounded-xl !px-2 !py-[4px] bg-main"
               )}
             >
               {
@@ -234,7 +237,7 @@ const Header: React.FC<TProps> = ({
                   className={`${
                     dataUser?.Data?.LevelId > 3
                       ? "text-[#8a64e3]"
-                      : "text-orange"
+                      : "text-white"
                   } font-semibold text-normal leading-[initial] text-[13px]`}
                 >
                   {getLevelId[dataUser?.Data?.LevelId]?.Name}
@@ -248,7 +251,7 @@ const Header: React.FC<TProps> = ({
               onClick={() => setVisible(true)}
             >
               <div
-                className={`text-[20px] text-[#fff] ${
+                className={`text-[20px] text-black ${
                   dataNewNotify > 0 && styles.bellIcon
                 }`}
               >
@@ -268,6 +271,7 @@ const Header: React.FC<TProps> = ({
               title="Thông báo"
               placement="right"
               visible={visible}
+              closable={false}
               width={"30vw"}
               maskStyle={{
                 backgroundColor: "#00000070",
@@ -318,7 +322,7 @@ const Header: React.FC<TProps> = ({
                 )}
               </div>
               <div className="ml-2 flex items-center">
-                <span className="text-[#fff] text-xs items-end uppercase font-semibold">
+                <span className="text-main text-xs items-end uppercase font-semibold">
                   {userNew?.UserName}
                 </span>
               </div>

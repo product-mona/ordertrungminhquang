@@ -53,7 +53,9 @@ export const EmployeeManagementForm: FC<TProps> = ({
       reset({
         Gender: EGenderData.FEMALE,
         LevelId: userLevelCatalogue?.[0]?.Id,
-        UserGroupId: userGroupCatalogue?.[1]?.Id,
+        UserGroupId: router.asPath.includes("admin-management")
+          ? userGroupCatalogue?.[0]?.Id
+          : userGroupCatalogue?.[1].Id,
         Status: EActiveData.Actived,
         IsAdmin: false,
         DatHangId: 0,
@@ -303,13 +305,17 @@ export const EmployeeManagementForm: FC<TProps> = ({
                 data={{
                   options: router.asPath.includes("admin-management")
                     ? userGroupCatalogue?.filter((x) => x.Id === 1)
-                    : userGroupCatalogue?.filter((x) => x.Id !== 1),
+                    : userGroupCatalogue?.filter(
+                        (x) => x.Id !== 1 && x.Id !== 2
+                      ),
                 }}
                 select={{ label: "Description", value: "Id" }}
                 defaultValue={
                   router.asPath.includes("admin-management")
                     ? userGroupCatalogue?.filter((x) => x.Id === 1)?.[0]
-                    : userGroupCatalogue?.filter((x) => x.Id !== 1)?.[0]
+                    : userGroupCatalogue?.filter(
+                        (x) => x.Id !== 1 && x.Id !== 2
+                      )?.[0]
                 }
                 label="Quyền hạn"
                 placeholder=""

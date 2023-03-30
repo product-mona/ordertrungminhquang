@@ -1,4 +1,5 @@
 .header {
+  @apply bg-white;
   top: 0;
   right: 0;
   width: calc(100% - 70px);
@@ -8,8 +9,7 @@
   align-items: center;
   z-index: 888;
   padding: 0 30px;
-  background-color: #0c5963;
-  box-shadow: 1px 10px 10px 10px #e6e3e30d;
+  /* background-color: #0c5963; */
 }
 
 .menu {
@@ -100,6 +100,7 @@
 }
 
 .block.profile .img img {
+  @apply border border-main;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -246,7 +247,7 @@
 }
 
 .btnSwitchManager {
-  background-color: #fffcfcc7;
+  @apply bg-main shadow-xl;
   border-radius: 3px;
   padding: 10px;
   transition: all 0.3s ease-in-out;
@@ -256,29 +257,15 @@
   overflow: hidden;
 }
 
-.btnSwitchManager::after {
-  position: absolute;
-  content: "";
-  left: auto;
-  right: 0;
-  top: 0;
-  width: 0;
-  height: 100%;
-  background-color: #fff;
-  transition: all 0.3s ease-in-out;
-  z-index: -1;
-}
-
-.btnSwitchManager:hover::after {
-  width: 100%;
-  left: 0;
-  right: auto;
+.btnSwitchManager:hover {
+  transform: translateY(5px);
+  box-shadow: none;
 }
 
 .btnSwitchManager i {
-  @apply text-[#0c5964] items-center flex;
+  @apply text-white items-center flex;
 }
 
 .btnSwitchManager span {
-  @apply text-[#0c5964] ml-2 font-bold leading-[initial];
+  @apply text-white ml-2 font-bold leading-[initial];
 }

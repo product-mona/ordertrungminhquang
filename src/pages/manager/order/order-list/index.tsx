@@ -68,7 +68,7 @@ const Index: TNextPageWithLayout = () => {
   };
 
   const { data, isFetching, isLoading, refetch } = useQuery(
-    ["orderList", { ...filter }],
+    ["orderList", {...filter}],
     () => mainOrder.getList(filter).then((res) => res.Data),
     {
       onSuccess: (data) => {
@@ -151,6 +151,7 @@ const Index: TNextPageWithLayout = () => {
       },
     }
   );
+  
 
   return (
     <Fragment>

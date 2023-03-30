@@ -4,7 +4,7 @@ import { TColumnsType } from "~/types/table";
 import { _format } from "~/utils";
 import { DataTable, showToast } from "../..";
 
-export const TheMostOrders = () => {
+export const TheMostOrders = () => {  
   const { isFetching, data, isLoading } = useQuery(
     [
       "clientData",
@@ -18,12 +18,13 @@ export const TheMostOrders = () => {
         .getList({
           PageIndex: 1,
           PageSize: 10,
-          OrderBy: "SumAmount desc",
+          OrderBy: "TotalMainOrder desc",
           UserGroupId: 2,
         })
-        .then((res) => res.Data.Items),
+        .then((res) => {
+          return res.Data.Items
+        }),
     {
-      keepPreviousData: true,
       onError: (error) =>
         showToast({
           title: "Đã xảy ra lỗi!",
@@ -36,7 +37,7 @@ export const TheMostOrders = () => {
     {
       title: "ID",
       dataIndex: "Id",
-      render: (_, __, index) => ++index,
+      render: (_, __, index) => index + 1,
     },
     {
       title: "Username",
@@ -60,20 +61,22 @@ export const TheMostOrders = () => {
       align: "right",
       render: (_, record) => _format.getVND(record?.TotalMainOrder, " "),
     },
-    {
-      title: "Ký gửi",
-      dataIndex: "TotalTransportationOrder",
-      align: "right",
-      render: (_, record) =>
-        _format.getVND(record?.TotalTransportationOrder, " "),
-    },
-    {
-      title: "Thanh toán hộ",
-      dataIndex: "TotalPayHelp",
-      align: "right",
-      render: (_, record) => _format.getVND(record?.TotalPayHelp, " "),
-    },
-  ];
+
+
+    // {
+    //   title: "Ký gửi",
+    //   dataIndex: "TotalTransportationOrder",
+    //   align: "right",
+    //   render: (_, record) =>
+    //     _format.getVND(record?.TotalTransportationOrder, " "),
+    // },
+    // {
+    //   title: "Thanh toán hộ",
+    //   dataIndex: "TotalPayHelp",
+    //   align: "right",
+    //   render: (_, record) => _format.getVND(record?.TotalPayHelp, " "),
+    // },
+  ];  
 
   // const expandable = {
   //   expandedRowRender: (data) => (
@@ -107,7 +110,7 @@ export const TheMostOrders = () => {
       <DataTable
         {...{
           columns,
-          data,
+          data: data?.sort((a, b) => b?.TotalMainOrder - a?.TotalMainOrder),
           style: "secondary",
           loading: isFetching,
           title: "Khách hàng có đơn hàng nhiều nhất",
