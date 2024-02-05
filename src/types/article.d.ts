@@ -7,6 +7,8 @@ type TArticleCategory = {
   Name: string;
   Code: string;
   Active: boolean;
+  Title: string;
+
 };
 
 type TArticleList = {
@@ -16,7 +18,7 @@ type TArticleList = {
   content: string;
   description: string;
   Active: boolean;
-  sidebar: boolean;
+  SideBar: boolean;
   categoryId: number;
   PageContent: string;
   img: any;

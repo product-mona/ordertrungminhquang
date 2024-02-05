@@ -6,8 +6,10 @@ import { Page } from "~/api";
 import {
   ArticleListForm,
   ArticleSEOForm,
+  FormUpload,
   IconButton,
   Layout,
+  ResizeImage,
   toast,
 } from "~/components";
 import { breadcrumb } from "~/configs";
@@ -52,42 +54,47 @@ const Index: TNextPageWithLayout = () => {
   };
 
   return (
-    <div className="tableBox">
-      <Tabs
-        tabBarExtraContent={
-          <div className="mb-4">
-            <IconButton
-              onClick={handleSubmit(_onPress)}
-              title="Cập nhật"
-              icon="fas fa-pencil"
-              showLoading
-              btnClass="!mr-4"
-              toolip=""
+    <>
+      <div className="tableBox mb-6">
+        <ResizeImage />
+      </div>
+      <div className="tableBox">
+        <Tabs
+          tabBarExtraContent={
+            <div className="mb-4">
+              <IconButton
+                onClick={handleSubmit(_onPress)}
+                title="Cập nhật"
+                icon="fas fa-pencil"
+                showLoading
+                btnClass="!mr-4"
+                toolip=""
+              />
+              <IconButton
+                title="Trở về"
+                icon="fas fa-undo-alt"
+                toolip=""
+                onClick={() => router.back()}
+              />
+            </div>
+          }
+        >
+          <Tabs.TabPane key={"1"} tab={"Nội dung bài viết"}>
+            <ArticleListForm
+              control={control as Control<TArticleList, object>}
+              type="edit"
+              data={data?.Data}
             />
-            <IconButton
-              title="Trở về"
-              icon="fas fa-undo-alt"
-              toolip=""
-              onClick={() => router.back()}
+          </Tabs.TabPane>
+          <Tabs.TabPane key={"2"} tab={"Cấu hình SEO"}>
+            <ArticleSEOForm
+              control={control as Control<TArticleSEO, object>}
+              data={data?.Data}
             />
-          </div>
-        }
-      >
-        <Tabs.TabPane key={"1"} tab={"Nội dung bài viết"}>
-          <ArticleListForm
-            control={control as Control<TArticleList, object>}
-            type="edit"
-            data={data?.Data}
-          />
-        </Tabs.TabPane>
-        <Tabs.TabPane key={"2"} tab={"Cấu hình SEO"}>
-          <ArticleSEOForm
-            control={control as Control<TArticleSEO, object>}
-            data={data?.Data}
-          />
-        </Tabs.TabPane>
-      </Tabs>
-    </div>
+          </Tabs.TabPane>
+        </Tabs>
+      </div>
+    </>
   );
 };
 

@@ -43,7 +43,7 @@ export const PopupNoti = () => {
     >
       <div className={styles.popupNoti}>
         <div className={styles.head}>
-          <h1>{data?.Data?.CompanyLongName}</h1>
+          <h1 className="!text-[18px]">{data?.Data?.CompanyLongName}</h1>
         </div>
         <div className={styles.content}>
           <h3>{data?.Data?.NotiPopupTitle}</h3>

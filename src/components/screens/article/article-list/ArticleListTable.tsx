@@ -1,7 +1,6 @@
 import { Pagination, Space, Tag } from "antd";
-import Link from "next/link";
 import router from "next/router";
-import React, { FC } from "react";
+import { FC } from "react";
 import { ActionButton, DataTable } from "~/components";
 import { useCatalogue } from "~/hooks/useCatalogue";
 import { TColumnsType, TTable } from "~/types/table";
@@ -20,7 +19,7 @@ export const ArticleListTable: FC<TTable<TPage> & TProps> = ({
   filter,
   handleFilter,
 }) => {
-  const { pageType } = useCatalogue({ pageTypeEnabled: true });
+  const { pageType } = useCatalogue({ pageTypeEnabled: true });  
 
   const columns: TColumnsType<TPage> = [
     {

@@ -1,6 +1,7 @@
 .popupNoti {
-  height: 60vh;
-  width: 60vw;
+  max-height: 80vh;
+  max-width: 60vw;
+  height: fit-content;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -83,7 +84,12 @@
 
 @media screen and (max-width: 768px) {
   .popupNoti {
-    width: 90vw;
-    height: 80vh;
+    max-width: 86vw;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .popupNoti {
+   max-width: 92vw;
   }
 }

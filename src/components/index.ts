@@ -138,3 +138,4 @@ export * from "./globals/filterBase";
 export { default as Menu } from "./globals/menu";
 // transfer
 export * from "./globals/transfer";
+export * from "./globals/resizeImage"

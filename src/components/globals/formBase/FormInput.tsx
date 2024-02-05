@@ -55,7 +55,7 @@ export const FormInput = <TFieldValues extends FieldValues = FieldValues>({
     <div className={`${inputContainerClassName} relative w-full`}>
       {label && (
         <label
-          className="text-[12px] bg-white py-[2px] uppercase font-bold"
+          className="text-[12px] py-[2px] uppercase font-bold"
           htmlFor={name}
         >
           {label} {required === true && <span className="text-red">*</span>}

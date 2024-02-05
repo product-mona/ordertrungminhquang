@@ -130,13 +130,13 @@ export const SalesOrderStatisticTable = ({
     {
       dataIndex: "Deposit",
       key: "Deposit",
-      title: "Đặt trả",
+      title: "Đã trả",
       align: "right",
       render: (money) => _format.getVND(money, ""),
     },
     {
-      dataIndex: "RemainingAmount",
-      key: "RemainingAmount",
+      dataIndex: "MustPay",
+      // key: "MustPay",
       title: "Còn lại",
       align: "right",
       render: (money) => _format.getVND(money, ""),

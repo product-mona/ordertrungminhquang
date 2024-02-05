@@ -108,7 +108,7 @@ export const OrderTempItem: React.FC<TProps> = ({index, orderTempData, updatePro
 									size="middle"
 									min={1}
 									max={100000}
-									value={quantity}
+									value={orderTempData?.Quantity}
 									onChange={handleQuantity}
 									// style={{height: "30px"}}
 								/>

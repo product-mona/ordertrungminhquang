@@ -156,6 +156,7 @@ type TStatisticalPurchaseProfit = {
   TotalPriceReal: number;
   PriceVND: number;
   FeeShipCNReal: number;
+  MustPay: number;
 };
 
 // Lợi nhuận thanh toán hộ

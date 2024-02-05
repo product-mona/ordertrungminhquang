@@ -193,7 +193,7 @@ export const CartOrderItem: React.FC<TProps> = ({
           key={1}
           showArrow={false}
         >
-          {cart?.OrderTemps.map((orderTempData, index) => (
+          {cart?.OrderTemps?.map((orderTempData, index) => (
             <Spin
               key={orderTempData?.Id}
               spinning={

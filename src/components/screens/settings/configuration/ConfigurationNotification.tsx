@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Control } from "react-hook-form";
-import { FormEditor, FormInput } from "~/components";
+import { FormEditor, FormInput, ResizeImage } from "~/components";
 
 type TProps<T extends object = object> = {
   control: Control<T, object>;
@@ -13,6 +13,9 @@ export const ConfigurationNotification: FC<TProps<TConfig4>> = ({
 }) => {
   return (
     <React.Fragment>
+      <div className="tableBox mb-6">
+        <ResizeImage />
+      </div>
       <div className="grid grid-cols-1 gap-4 px-6 mt-4">
         <div className="col-span-1">
           <FormInput
